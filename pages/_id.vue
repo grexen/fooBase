@@ -10,7 +10,7 @@
         async asyncData({params, error, payload}) {
             if(payload) {
                 return {
-                    fooVideo: payload['fooVideos'][params.id],
+                    fooVideo: payload,
                 };
             } else {
                 const jsonData = require('../modules/dataProvider');

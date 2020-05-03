@@ -65,10 +65,19 @@ export default {
     },
     generate: {
         routes() {
-            return [{
-                route: '/',
-                payload: jsonData
-            }];
+            let routes = Object.entries(jsonData.fooVideos).map((fooVideo) => {
+                return {
+                    route: '/' + fooVideo[0],
+                    payload: fooVideo[1]
+                }
+            })
+            routes.push(
+                {
+                    route: '/',
+                    payload: jsonData
+                }
+            );
+            return routes;
         }
     },
 }
