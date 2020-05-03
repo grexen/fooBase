@@ -1,22 +1,22 @@
 <template>
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-        <article v-for="fooVideo in fooVideos" class="rounded-lg overflow-hidden shadow-lg h-full hover:shadow-2xl">
-            <a :href="fooVideo.Link" target="_blank">
+        <article v-for="(fooVideo, fooVideoKey) in fooVideos" :key="fooVideoKey" class="rounded-lg overflow-hidden shadow-lg h-full hover:shadow-2xl">
+            <a :href="fooVideoKey">
                 <img alt="Placeholder" class="block h-auto w-full" :src="getYoutubeImageUrl(fooVideo)">
             </a>
             <header class="flex items-center justify-between leading-tight p-2 md:p-4">
                 <h1 class="font-semibold text-gray-700">
                     <a class="no-underline" :href="fooVideo.Link" target="_blank">
-                        {{ fooVideo.Title }}
+                        {{ fooVideo.title }}
                     </a>
                 </h1>
             </header>
             <p class="p-2 md:p-4 text-sm">
-                by {{ getArtist(fooVideo) }}
+                by {{ fooVideo.artist }}
             </p>
             <footer class="flex items-center justify-between leading-none p-2 md:p-4">
                     <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">
-                        {{ getFooPlayer(fooVideo) }}
+                        {{ fooVideo.fooPlayer }}
                     </span>
             </footer>
         </article>
@@ -27,7 +27,7 @@
     export default {
         name: "FooVideoList",
         props: {
-            fooVideos: Array
+            fooVideos: Object
         },
 
         data() {
@@ -38,11 +38,7 @@
         },
 
         methods: {
-            /**
-            async fetchFooVideos() {
-                const fooVideoResponse = await this.$axios.$get('http://localhost:8080/api/collections/get/FooVideos?token=c33f9825f4ac2f443bfcc70abc6cec');
-                this.fooVideos = fooVideoResponse.entries;
-            },**/
+
             getArtist(fooVideo) {
                 let artist = 'unknown';
                 if(fooVideo.Artists) {
@@ -50,20 +46,9 @@
                 }
                 return artist;
             },
-            getFooPlayer(fooVideo) {
-                let fooPlayer = 'unknown';
-                if(fooVideo.FooPlayers) {
-                    fooPlayer = fooVideo.FooPlayers[0].display;
-                }
-                return fooPlayer;
-            },
-
             getYoutubeImageUrl(fooVideo) {
-                const regex = /http.*\?v=(.*)/;
-                const match = regex.exec(fooVideo.Link);
-
-                if(match && match[1]) {
-                    return `https://img.youtube.com/vi/${match[1]}/0.jpg`;
+                if(fooVideo.youTubeId) {
+                    return `https://img.youtube.com/vi/${fooVideo.youTubeId}/0.jpg`;
                 } else {
                     return 'https://via.placeholder.com/400x300'
                 }

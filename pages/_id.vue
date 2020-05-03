@@ -1,21 +1,22 @@
 <template>
     <div>
-
         <h1 class="text-xl">FooVideo: {{ $route.params.id }}</h1>
-        <div>Titel: {{ fooVideo.Title }}</div>
+        <div>Titel: {{ fooVideo.title }}</div>
     </div>
 </template>
 
 <script>
 	export default {
-		name: "_id.vue",
-
-        async asyncData({params, error, payload, $axios}) {
+        async asyncData({params, error, payload}) {
             if(payload) {
-                return {fooVideos: payload};
+                return {
+                    fooVideo: payload['fooVideos'][params.id],
+                };
             } else {
-                const response = await $axios.$get(`http://localhost:8080/api/collections/get/FooVideos?filter[_id]=${params.id}&token=c33f9825f4ac2f443bfcc70abc6cec`);
-                return {fooVideo: response.entries[0]};
+                const jsonData = require('../modules/dataProvider');
+                return {
+                    fooVideo: jsonData['fooVideos'][params.id],
+                };
             }
         },
 	}

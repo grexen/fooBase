@@ -1,4 +1,5 @@
 import axios from 'axios';
+const jsonData = require('./modules/dataProvider');
 
 export default {
     mode: 'universal',
@@ -57,19 +58,17 @@ export default {
         ** You can extend webpack config here
         */
         extend(config, ctx) {
+            config.node = {
+                fs: 'empty'
+            };
         }
     },
     generate: {
         routes() {
-            return axios.get('http://localhost:8080/api/collections/get/FooVideos?token=c33f9825f4ac2f443bfcc70abc6cec')
-                .then((res) => {
-                    const result = [{
-                        route: '/',
-                        payload: res.data.entries
-                    }];
-                    console.log('result: ', result)
-                    return result;
-                })
+            return [{
+                route: '/',
+                payload: jsonData
+            }];
         }
     },
 }

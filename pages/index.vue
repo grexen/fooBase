@@ -14,12 +14,18 @@
         components: {
             FooVideoList
         },
-        async asyncData({params, error, payload, $axios}) {
+        async asyncData({params, error, payload}) {
             if(payload) {
-                return {fooVideos: payload};
+                return {
+                    fooVideos: payload['fooVideos'],
+                    fooPlayer: payload['fooPlayers']
+                };
             } else {
-                const response = await $axios.$get('http://localhost:8080/api/collections/get/FooVideos?token=c33f9825f4ac2f443bfcc70abc6cec');
-                return {fooVideos: response.entries};
+                const jsonData = require('../modules/dataProvider');
+                return {
+                    fooVideos: jsonData['fooVideos'],
+                    fooPlayers: jsonData['fooPlayers']
+                };
             }
         },
     }
