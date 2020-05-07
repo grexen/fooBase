@@ -1,5 +1,5 @@
 ---
 shortName: Zidane
 fullName: Zinedine Zidane
-birthDay: 2020-05-07T16:43:53.853Z
+birthDay: 1972-06-23T17:43:53.853Z
 ---
