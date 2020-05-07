@@ -1,19 +1,60 @@
 backend:
     name: git-gateway
-    branch: master # Branch to update (optional; defaults to master)
+    branch: test # Branch to update (optional; defaults to master)
 
 media_folder: "static/images/uploads" # Media files will be stored in the repo under static/images/uploads
 public_folder: "/images/uploads"
 
+slug:
+    encoding: "ascii"
+    clean_accents: true
+    sanitize_replacement: "-"
+
 collections:
-    -   name: "waZ" # Used in routes, e.g., /admin/collections/blog
+    -   name: "fooVideos" # Used in routes, e.g., /admin/collections/blog
         label: "FooVideo" # Used in the UI
-        folder: "content/fooVideos" # The path to the folder where the documents are stored
-        create: true # Allow users to create new documents in this collection
-        slug: "{{year}}-{{month}}-{{day}}-{{slug}}" # Filename template, e.g., YYYY-MM-DD-title.md
-        fields: # The fields for each document, usually in front matter
+        folder: "content/fooVideos"
+        create: true
+        slug: "{{slug}}" # Filename template, e.g., YYYY-MM-DD-title.md
+        fields:
             - {label: "Title", name: "title", widget: "string"}
             - {label: "Publish Date", name: "date", widget: "datetime"}
             #- {label: "Featured Image", name: "thumbnail", widget: "image"}
+            #- {label: "Body", name: "body", widget: "markdown"}
             - {label: "YouTube Link", name: "youTubeLink", widget: "string"}
-            - {label: "Body", name: "body", widget: "markdown"}
+            -   label: "FooPlayer"
+                name: "fooPlayer"
+                widget: "relation"
+                collection: "fooPlayers"
+                searchFields: ["shortName", "fullName"]
+                valueField: "{{filename}}"
+                displayFields: ["{{shortName}} ({{fullName}})"]
+
+            -   label: "FooArtist"
+                name: "fooArtist"
+                widget: "relation"
+                collection: "fooArtists"
+                searchFields: ["name"]
+                valueField: "{{filename}}"
+                displayFields: ["name"]
+                required: false
+
+    -   name: "fooPlayers"
+        label: "FooPlayer"
+        folder: "content/fooPlayers"
+        create: true
+        identifier_field: shortName
+        fields:
+            - {label: "Name", name: "shortName", widget: "string"}
+            - {label: "Full name", name: "fullName", widget: "string"}
+            - {label: "Birthday", name: "birthDay", widget: "date", required: false}
+
+    -   name: "fooArtists"
+        label: "FooArtist"
+        folder: "content/fooArtists"
+        create: true
+        identifier_field: name
+        fields:
+            - {label: "Name", name: "name", widget: "string"}
+            - {label: "YouTube Link", name: "youTube", widget: "string", required: false}
+            - {label: "Twitter Link", name: "twitter", widget: "string", required: false}
