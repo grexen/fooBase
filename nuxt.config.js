@@ -1,5 +1,5 @@
 import axios from 'axios';
-const jsonData = require('./modules/dataProvider');
+const dataProvider = require('./modules/dataProvider');
 
 export default {
     mode: 'universal',
@@ -68,16 +68,16 @@ export default {
     },
     generate: {
         routes() {
-            let routes = Object.entries(jsonData.fooVideos).map((fooVideo) => {
+            let routes = dataProvider.getCollections().fooVideos.map((fooVideo) => {
                 return {
-                    route: '/' + fooVideo[0],
-                    payload: fooVideo[1]
+                    route: '/' + fooVideo.slug,
+                    payload: fooVideo
                 }
             })
             routes.push(
                 {
                     route: '/',
-                    payload: jsonData
+                    payload: dataProvider.getCollections()
                 }
             );
             return routes;

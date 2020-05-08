@@ -21,10 +21,10 @@
                     fooPlayer: payload['fooPlayers']
                 };
             } else {
-                const jsonData = require('../modules/dataProvider');
+                const dataProvider = require('../modules/dataProvider');
                 return {
-                    fooVideos: jsonData['fooVideos'],
-                    fooPlayers: jsonData['fooPlayers']
+                    fooVideos: dataProvider.getCollections()['fooVideos'],
+                    fooPlayers: dataProvider.getCollections()['fooPlayers']
                 };
             }
         },

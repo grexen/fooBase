@@ -1,7 +1,15 @@
 <template>
     <div>
         <h1 class="text-xl">FooVideo: {{ $route.params.id }}</h1>
-        <div>Titel: {{ fooVideo.title }}</div>
+        <div class="pb-2">Titel: {{ fooVideo.attributes.title }}</div>
+
+        <nuxt-link to="/" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded inline-block">
+            go back
+        </nuxt-link>
+
+        <a :href="fooVideo.attributes.youTubeLink" target="_blank" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded inline-block">
+            watch
+        </a>
     </div>
 </template>
 
@@ -13,9 +21,9 @@
                     fooVideo: payload,
                 };
             } else {
-                const jsonData = require('../modules/dataProvider');
+                const dataProvider = require('../modules/dataProvider');
                 return {
-                    fooVideo: jsonData['fooVideos'][params.id],
+                    fooVideo: dataProvider.getFooVideoBySlug(params.id)
                 };
             }
         },
