@@ -24,8 +24,6 @@ function getCollections() {
             attributes: frontMatter.attributes,
             body: frontMatter.body
         };
-
-
         jsonData[collectionName].push(fooCollectionItem);
     }
     return jsonData;
