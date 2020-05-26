@@ -3,7 +3,11 @@
         <h1 class="title text-2xl font-bold text-gray-800 my-4">
             Welcome to fooBase
         </h1>
-        <h2>
+        <multi-search></multi-search>
+
+
+        <hr />
+        <h2 class="py-5">
             Latest additions:
         </h2>
         <foo-video-list :foo-videos="fooVideos"></foo-video-list>
@@ -12,11 +16,16 @@
 
 <script>
     import FooVideoList from "../components/FooVideoList";
+    import MultiSearch from "../components/MultiSearch";
 
     export default {
         components: {
+            MultiSearch,
             FooVideoList
         },
+
+
+
         async asyncData({ $content }) {
             const fooVideos = await $content('fooVideos').sortBy('date', 'desc').limit(8).fetch()
 
