@@ -23,21 +23,6 @@
             return {
                 fooVideos
             }
-
-            /**
-            if(payload) {
-                return {
-                    fooVideos: payload['fooVideos'],
-                    fooPlayer: payload['fooPlayers']
-                };
-            } else {
-                const dataProvider = require('../modules/dataProvider');
-                return {
-                    fooVideos: dataProvider.getCollections()['fooVideos'],
-                    fooPlayers: dataProvider.getCollections()['fooPlayers']
-                };
-            }
-             **/
         },
     }
 </script>

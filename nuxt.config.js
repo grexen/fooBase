@@ -69,20 +69,15 @@ export default {
         }
     },
     generate: {
-        routes() {
-            let routes = dataProvider.getCollections().fooVideos.map((fooVideo) => {
+        async routes() {
+            const { $content } = require('@nuxt/content')
+            const fooVideos = await $content('fooVideos').only(['slug']).fetch()
+
+            return fooVideos.map((fooVideo) => {
                 return {
                     route: '/' + fooVideo.slug,
-                    payload: fooVideo
                 }
             })
-            routes.push(
-                {
-                    route: '/',
-                    payload: dataProvider.getCollections()
-                }
-            );
-            return routes;
         }
     },
 }
