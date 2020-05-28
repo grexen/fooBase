@@ -3,29 +3,34 @@
         <h1 class="title text-2xl font-bold text-gray-800 my-4">
             Welcome to fooBase
         </h1>
+        <multi-search></multi-search>
+
+
+        <hr />
+        <h2 class="py-5">
+            Latest additions:
+        </h2>
         <foo-video-list :foo-videos="fooVideos"></foo-video-list>
     </div>
 </template>
 
 <script>
     import FooVideoList from "../components/FooVideoList";
+    import MultiSearch from "../components/MultiSearch";
 
     export default {
         components: {
+            MultiSearch,
             FooVideoList
         },
-        async asyncData({params, error, payload}) {
-            if(payload) {
-                return {
-                    fooVideos: payload['fooVideos'],
-                    fooPlayer: payload['fooPlayers']
-                };
-            } else {
-                const dataProvider = require('../modules/dataProvider');
-                return {
-                    fooVideos: dataProvider.getCollections()['fooVideos'],
-                    fooPlayers: dataProvider.getCollections()['fooPlayers']
-                };
+
+
+
+        async asyncData({ $content }) {
+            const fooVideos = await $content('fooVideos').sortBy('date', 'desc').limit(24).fetch()
+
+            return {
+                fooVideos
             }
         },
     }

@@ -7,7 +7,7 @@ export default {
     ** Headers of the page
     */
     head: {
-        title: process.env.npm_package_name || '',
+        title: "fooBase",
         meta: [
             {charset: 'utf-8'},
             {name: 'viewport', content: 'width=device-width, initial-scale=1'},
@@ -47,6 +47,8 @@ export default {
         '@nuxtjs/axios',
         // Doc: https://github.com/nuxt-community/dotenv-module
         '@nuxtjs/dotenv',
+        // Doc: https://content.nuxtjs.org/advanced
+        '@nuxt/content'
     ],
     /*
     ** Axios module configuration
@@ -67,20 +69,24 @@ export default {
         }
     },
     generate: {
-        routes() {
-            let routes = dataProvider.getCollections().fooVideos.map((fooVideo) => {
+        async routes() {
+            const { $content } = require('@nuxt/content');
+            const fooVideos = await $content('fooVideos').only(['slug']).fetch();
+            const fooPlayers = await $content('fooPlayers').only(['slug']).fetch();
+
+            const fooVideoRoutes = fooVideos.map((fooVideo) => {
                 return {
                     route: '/' + fooVideo.slug,
-                    payload: fooVideo
                 }
             })
-            routes.push(
-                {
-                    route: '/',
-                    payload: dataProvider.getCollections()
+
+            const fooPlayerRoutes = fooPlayers.map((fooPlayer) => {
+                return {
+                    route: `fooplayers/${fooPlayer.slug}`
                 }
-            );
-            return routes;
+            })
+
+            return fooVideoRoutes.concat(fooPlayerRoutes);
         }
     },
 }
