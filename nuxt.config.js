@@ -7,7 +7,7 @@ export default {
     ** Headers of the page
     */
     head: {
-        title: process.env.npm_package_name || '',
+        title: "fooBase",
         meta: [
             {charset: 'utf-8'},
             {name: 'viewport', content: 'width=device-width, initial-scale=1'},
@@ -70,14 +70,23 @@ export default {
     },
     generate: {
         async routes() {
-            const { $content } = require('@nuxt/content')
-            const fooVideos = await $content('fooVideos').only(['slug']).fetch()
+            const { $content } = require('@nuxt/content');
+            const fooVideos = await $content('fooVideos').only(['slug']).fetch();
+            const fooPlayers = await $content('fooPlayers').only(['slug']).fetch();
 
-            return fooVideos.map((fooVideo) => {
+            const fooVideoRoutes = fooVideos.map((fooVideo) => {
                 return {
                     route: '/' + fooVideo.slug,
                 }
             })
+
+            const fooPlayerRoutes = fooPlayers.map((fooPlayer) => {
+                return {
+                    route: `fooplayers/${fooPlayer.slug}`
+                }
+            })
+
+            return fooVideoRoutes.concat(fooPlayerRoutes);
         }
     },
 }

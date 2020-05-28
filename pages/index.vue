@@ -27,7 +27,7 @@
 
 
         async asyncData({ $content }) {
-            const fooVideos = await $content('fooVideos').sortBy('date', 'desc').limit(8).fetch()
+            const fooVideos = await $content('fooVideos').sortBy('date', 'desc').limit(24).fetch()
 
             return {
                 fooVideos

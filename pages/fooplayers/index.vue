@@ -1,4 +1,7 @@
 <template>
+    <div>
+        <h1>FooPlayers</h1>
+    </div>
 
 </template>
 
