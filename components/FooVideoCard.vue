@@ -1,5 +1,5 @@
 <template>
-    <nuxt-link :to="{ name: 'id', params: { id: fooVideo.slug }}">
+    <nuxt-link :to="{ name: 'foovideos-id', params: { id: fooVideo.slug }}">
         <article class="rounded-lg overflow-hidden shadow-lg h-full hover:shadow-2xl">
             <img alt="Placeholder" class="block h-auto w-full" :src="imgUrl">
             <header class="flex items-center justify-between leading-tight p-2 md:p-4">

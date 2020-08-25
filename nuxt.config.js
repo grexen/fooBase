@@ -76,7 +76,7 @@ export default {
 
             const fooVideoRoutes = fooVideos.map((fooVideo) => {
                 return {
-                    route: '/' + fooVideo.slug,
+                    route: `foovideos/${fooVideo.slug}`,
                 }
             })
 
