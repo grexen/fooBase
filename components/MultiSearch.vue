@@ -1,11 +1,12 @@
 <template>
-    <div class="pb-6">
+    <div>
 
-        <div class="relative mr-6 my-2">
-            <input type="search" v-model="query" @input="$fetch" class="bg-purple-white shadow rounded border-0 p-3" placeholder="Search fooBase..." />
+        <input type="search" v-model="query" @input="$fetch" class="bg-purple-white shadow rounded border-0 p-3 w-full" placeholder="Search fooBase..." />
+
+
+        <div v-if="query" class="searchResult container rounded p-5 h-full">
+            <foo-video-list :foo-videos="fooVideos"></foo-video-list>
         </div>
-
-        <foo-video-list v-if="query" :foo-videos="fooVideos"></foo-video-list>
     </div>
 
 </template>
@@ -30,5 +31,8 @@
 </script>
 
 <style scoped>
-
+    .searchResult {
+        position: absolute;
+        background-color: white;
+    }
 </style>

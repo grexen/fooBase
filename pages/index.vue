@@ -3,7 +3,11 @@
         <h1 class="title text-2xl font-bold text-gray-800 my-4">
             Welcome to fooBase
         </h1>
-        <multi-search></multi-search>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 pb-5">
+            <multi-search></multi-search>
+            <user-button></user-button>
+        </div>
+
 
 
         <hr />
@@ -17,9 +21,11 @@
 <script>
     import FooVideoList from "../components/FooVideoList";
     import MultiSearch from "../components/MultiSearch";
+    import UserButton from "../components/UserButton";
 
     export default {
         components: {
+            UserButton,
             MultiSearch,
             FooVideoList
         },
