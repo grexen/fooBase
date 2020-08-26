@@ -21,6 +21,7 @@
             <button v-else onclick="netlifyIdentity.open()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-full md:w-auto">
                 Login
             </button>
+            <div class="hidden"></div>
         </client-only>
     </div>
 </template>
