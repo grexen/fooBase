@@ -18,7 +18,7 @@
     },
     "devDependencies": {
         "@nuxtjs/tailwindcss": "^1.0.0",
-        "axios": "^0.19.2",
+        "axios": "^0.21.1",
         "front-matter": "^3.1.0",
         "glob": "^7.1.6"
     }
