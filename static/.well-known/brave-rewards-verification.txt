@@ -1,0 +1,4 @@
+This is a Brave Rewards publisher verification file.
+
+Domain: foobase.netlify.app
+Token: 2b7445af02eb0ceb9f51f4d411848db8f0e481f6ed44cfd497aca431c4e727da
