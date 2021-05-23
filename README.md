@@ -1,8 +1,9 @@
-# foobase
+# FooBase
+FooBase is an open source website for football videos hosted on netlify [here](https://foobase.netlify.app/).
+Videos can be added/edited directly via code commit on github or by creating an account via the [netlify-cms](https://foobase.netlify.app/admin/) connected to this repository.
 
-> Foobase Frontend Application with Nuxt.js
 
-## Build Setup
+## Running the Nuxt.js application locally
 
 ```bash
 # install dependencies
